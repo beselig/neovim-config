@@ -34,41 +34,11 @@ return {
     config = function()
       local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-      ---@diagnostic disable-next-line: param-type-mismatch
-      local node_modules_dir = vim.fn.finddir('node_modules', vim.fn.stdpath 'config')
-      if not node_modules_dir then
-        vim.notify('make sure to run npm install inside ' .. vim.fn.stdpath 'config' .. ' or volar and ts_ls might not work properly', vim.log.levels.WARN)
-      end
-
-      local npm_root_g_dir = require('config.lsp.npm').get_npm_root()
-      local vue_language_server_location = npm_root_g_dir .. '/@vue/languge-server'
-
       -- MASON
       local servers = {
         -- clangd = {},
         gopls = {},
         pyright = {},
-        volar = {
-          capabilities = capabilities,
-          -- add filetypes for typescript, javascript and vue
-          filetypes = {
-            'vue',
-            -- 'typescript',
-            -- 'typescriptreact',
-            -- 'javascript',
-            -- 'javascriptreact',
-          },
-          init_options = {
-            typescript = {
-              -- replace with your global TypeScript library path
-              tsdk = vim.fn.getcwd() .. '/node_modules/typescript/lib',
-            },
-            vue = {
-              -- disable hybrid mode
-              hybridMode = false,
-            },
-          },
-        },
         html = {},
 
         lua_ls = {
@@ -136,15 +106,9 @@ return {
           'javascriptreact',
           'typescript',
           'typescriptreact',
-          -- 'vue',
         },
         settings = {
           expose_as_code_action = { 'add_missing_imports', 'remove_unused' },
-          tsserver_path = node_modules_dir .. 'node_modules/typescript/lib',
-          -- tsserver_plugins = {
-          --   -- Seemingly this is enough, no name, location or languages needed.
-          --   '@vue/typescript-plugin',
-          -- },
         },
       }
     end,
