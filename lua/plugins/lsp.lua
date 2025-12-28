@@ -17,6 +17,16 @@ return {
         },
       },
       {
+        'luckasRanarison/tailwind-tools.nvim',
+        name = 'tailwind-tools',
+        build = ':UpdateRemotePlugins',
+        dependencies = {
+          'nvim-treesitter/nvim-treesitter',
+          'nvim-telescope/telescope.nvim', -- optional
+          'neovim/nvim-lspconfig', -- optional
+        },
+      },
+      {
         'folke/lazydev.nvim',
         ft = 'lua', -- only load on lua files
         opts = {
@@ -40,6 +50,8 @@ return {
         gopls = {},
         pyright = {},
         html = {},
+
+        postgres_lsp = {},
 
         lua_ls = {
           -- cmd = {...},
@@ -109,6 +121,21 @@ return {
         },
         settings = {
           expose_as_code_action = { 'add_missing_imports', 'remove_unused' },
+        },
+      }
+      require('tailwind-tools').setup {
+        server = {
+          capabilities = vim.lsp.ClientCapabilities,
+          override = true, -- setup the server from the plugin if true
+          settings = { -- shortcut for `settings.tailwindCSS`
+            -- experimental = {
+            --   classRegex = { "tw\\('([^']*)'\\)" }
+            -- },
+            -- includeLanguages = {
+            --   elixir = "phoenix-heex",
+            --   heex = "phoenix-heex",
+            -- },
+          },
         },
       }
     end,

@@ -5,22 +5,20 @@ return {
     priority = 1000,
   },
   {
-    "f-person/auto-dark-mode.nvim",
+    'f-person/auto-dark-mode.nvim',
     config = function()
-      require("auto-dark-mode").setup({
+      require('auto-dark-mode').setup {
         set_dark_mode = function()
-          print("dark")
-          vim.api.nvim_set_option_value("background", "dark", {})
-          vim.cmd("colorscheme github_dark")
+          vim.api.nvim_set_option_value('background', 'dark', {})
+          vim.cmd 'colorscheme github_dark_high_contrast'
         end,
         set_light_mode = function()
-          print("light")
-          vim.api.nvim_set_option_value("background", "light", {})
-          vim.cmd("colorscheme github_light")
+          vim.api.nvim_set_option_value('background', 'light', {})
+          vim.cmd 'colorscheme github_light'
         end,
         update_interval = 3000,
-        fallback = "dark",
-      })
+        fallback = 'dark',
+      }
     end,
   },
   -- {

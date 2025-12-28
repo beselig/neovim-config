@@ -11,6 +11,7 @@ return {
       formatters_by_ft = {
         lua = { 'stylua' },
         python = { 'isort', 'black' },
+        sql = { 'sqlfluff' },
 
         -- conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },

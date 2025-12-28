@@ -85,6 +85,11 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+-- buffer related
+vim.keymap.set('n', '<leader>p', function()
+  vim.fn.setreg('+', vim.api.nvim_buf_get_name(0))
+end, { desc = 'Copy relative path of current buffer' })
+
 -- Navigating quickfix
 vim.keymap.set('n', '<M-j>', '<cmd>cnext<CR>')
 vim.keymap.set('n', '<M-k>', '<cmd>cprev<CR>')
@@ -94,8 +99,10 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagn
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- LSP keymaps
-vim.keymap.set('i', '<M-CR>', vim.lsp.buf.code_action)
+vim.keymap.set('n', '<M-CR>', vim.lsp.buf.code_action)
 vim.keymap.set('i', 'gd', vim.lsp.buf.definition)
+
+vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename)
 
 -- macro keymaps
 vim.keymap.set('v', '@', '":norm @" . getcharstr() . "<cr>"', { expr = true })
