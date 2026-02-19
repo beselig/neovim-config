@@ -121,3 +121,5 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 require 'config.terminal'
 
 vim.notify 'Happy coding'
+
+vim.o.winborder = 'rounded'

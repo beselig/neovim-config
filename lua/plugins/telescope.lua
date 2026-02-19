@@ -43,7 +43,8 @@ return {
 
     vim.keymap.set('n', '<C-[>', builtin.lsp_references)
     vim.keymap.set('n', '<space>sh', builtin.help_tags)
-    vim.keymap.set('n', '<space>sf', builtin.git_files)
+    vim.keymap.set('n', '<space>sF', builtin.git_files)
+    vim.keymap.set('n', '<space>sf', builtin.find_files)
     vim.keymap.set('n', '<space>sd', builtin.diagnostics)
     vim.keymap.set('n', '<space>sn', function()
       builtin.find_files { cwd = vim.fn.stdpath 'config' }

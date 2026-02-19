@@ -1,10 +1,11 @@
 return {
-	'numToStr/Comment.nvim',
-	opts = {
-		extra = {
-			above = 'gcI',
-			below = 'gco',
-			eol = 'gcA',
-		},
-	}
+  'numToStr/Comment.nvim',
+  enabled = false,
+  opts = {
+    extra = {
+      above = 'gcI',
+      below = 'gco',
+      eol = 'gcA',
+    },
+  },
 }

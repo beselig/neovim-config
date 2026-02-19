@@ -1,6 +1,7 @@
 return {
   {
     'nvim-tree/nvim-tree.lua',
+    enabled = false,
     config = function()
       -- disable netrw at the very start of your init.lua
       vim.g.loaded_netrw = 1
@@ -10,7 +11,7 @@ return {
       vim.opt.termguicolors = true
 
       -- empty setup using defaults
-      require("nvim-tree").setup()
+      require('nvim-tree').setup()
 
       -- OR setup with some options
       -- require("nvim-tree").setup({
@@ -27,6 +28,6 @@ return {
       --     dotfiles = true,
       --   },
       -- })
-    end
-  }
+    end,
+  },
 }

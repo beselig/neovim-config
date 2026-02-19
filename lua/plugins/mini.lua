@@ -1,7 +1,36 @@
 return {
   'echasnovski/mini.nvim',
+  dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring' },
   version = false,
   config = function()
+    require('mini.comment').setup {
+      n_lines = 500,
+      custom_commentstring = function()
+        local plug = require('ts_context_commentstring').setup {
+          languages = {
+            javascript = {
+              __default = '// %s',
+              jsx_element = '{/* %s */}',
+              jsx_fragment = '{/* %s */}',
+              jsx_attribute = '// %s',
+              comment = '// %s',
+            },
+            typescript = {
+              __default = '// %s',
+              jsx_element = '{/* %s */}',
+              jsx_fragment = '{/* %s */}',
+              jsx_attribute = '// %s',
+              comment = '// %s',
+            },
+          },
+        }
+
+        print 'foo'
+
+        return plug.calculate_commentstring() or vim.bo.commentstring
+      end,
+    }
+
     require('mini.ai').setup { n_lines = 500 }
 
     local statusline = require 'mini.statusline'

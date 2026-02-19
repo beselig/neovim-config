@@ -50,6 +50,7 @@ return {
         gopls = {},
         pyright = {},
         html = {},
+        prismals = {},
 
         postgres_lsp = {},
 
@@ -82,6 +83,13 @@ return {
           },
         },
       }
+
+      -- add prisma filetype
+      -- vim.filetype.add {
+      --   extension = {
+      --     prisma = 'prisma',
+      --   },
+      -- }
 
       require('mason').setup()
 
