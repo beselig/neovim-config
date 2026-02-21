@@ -27,6 +27,7 @@ return {
         css = { 'prettierd', 'prettier' },
         scss = { 'prettierd', 'prettier' },
         json = { 'prettierd', 'prettier' },
+        prisma = { 'prettierd', 'prettier' },
       },
     },
   },
