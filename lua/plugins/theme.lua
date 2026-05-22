@@ -32,10 +32,20 @@ return {
           -- require('github-theme').setup {}
           vim.api.nvim_set_option_value('background', 'dark', {})
           -- vim.cmd 'colorscheme github_dark'
+          require('rose-pine').setup {
+            styles = {
+              transparency = true,
+            },
+          }
           vim.cmd 'colorscheme rose-pine-moon'
         end,
         set_light_mode = function()
           vim.api.nvim_set_option_value('background', 'light', {})
+          require('rose-pine').setup {
+            styles = {
+              transparency = true,
+            },
+          }
           vim.cmd 'colorscheme rose-pine'
           -- vim.cmd 'colorscheme github_light'
           -- vim.cmd 'colorscheme tokyonight-day'

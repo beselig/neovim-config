@@ -8,15 +8,6 @@ return {
         'WhoIsSethDaniel/mason-tool-installer.nvim',
       },
       {
-        'pmizio/typescript-tools.nvim',
-        dependencies = {
-          {
-            'nvim-lua/plenary.nvim',
-            'neovim/nvim-lspconfig',
-          },
-        },
-      },
-      {
         'luckasRanarison/tailwind-tools.nvim',
         name = 'tailwind-tools',
         build = ':UpdateRemotePlugins',
@@ -50,9 +41,11 @@ return {
         gopls = {},
         pyright = {},
         html = {},
-        prismals = {},
 
         postgres_lsp = {},
+
+        -- ts_ls = {},
+        -- vue_ls = {},
 
         lua_ls = {
           -- cmd = {...},
@@ -84,13 +77,6 @@ return {
         },
       }
 
-      -- add prisma filetype
-      -- vim.filetype.add {
-      --   extension = {
-      --     prisma = 'prisma',
-      --   },
-      -- }
-
       require('mason').setup()
 
       local ensure_installed = vim.tbl_keys(servers or {})
@@ -111,7 +97,12 @@ return {
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for tsserver)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
+            vim.lsp.config(server_name, {
+              on_attach = function(client, bufnr)
+                vim.notify(client + 'attached to buffer: ' + bufnr)
+              end,
+            })
+            -- require('lspconfig')[server_name].setup(server)
           end,
         },
       }
@@ -119,18 +110,57 @@ return {
       -- load some custom utility functions
       require 'config.lsp.utils'
 
-      -- typescript-tools
-      require('typescript-tools').setup {
-        filetypes = {
-          'javascript',
-          'javascriptreact',
-          'typescript',
-          'typescriptreact',
-        },
-        settings = {
-          expose_as_code_action = { 'add_missing_imports', 'remove_unused' },
-        },
+      -- Typescript + Vue
+      local vue_language_server_path = vim.fn.stdpath 'data' .. '/mason/packages/vue-language-server/node_modules/@vue/language-server'
+      local tsserver_filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' }
+      local vue_plugin = {
+        name = '@vue/typescript-plugin',
+        location = vue_language_server_path,
+        languages = { 'vue' },
+        configNamespace = 'typescript',
       }
+
+      local ts_ls_config = {
+        init_options = {
+          plugins = {
+            vue_plugin,
+          },
+        },
+        filetypes = tsserver_filetypes,
+      }
+
+      local vue_ls_config = {}
+
+      vim.lsp.config('vue_ls', vue_ls_config)
+      vim.lsp.config('ts_ls', ts_ls_config)
+      vim.lsp.enable { 'ts_ls', 'vue_ls' } -- If using `ts_ls` replace `vtsls` to `ts_ls`
+
+      vim.api.nvim_create_autocmd('LspAttach', {
+        callback = function(args)
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          if not client then
+            return
+          end
+
+          -- keymaps for all clients
+          vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { buffer = args.buf })
+
+          -- ts_ls-only keymaps
+          if client.name == 'ts_ls' then
+            -- e.g. organize imports via code action filter
+            vim.keymap.set('n', '<leader>oi', function()
+              vim.lsp.buf.code_action {
+                apply = true,
+                context = {
+                  only = { 'source.organizeImports' },
+                  diagnostics = {},
+                },
+              }
+            end, { buffer = args.buf })
+          end
+        end,
+      })
+
       require('tailwind-tools').setup {
         server = {
           capabilities = vim.lsp.ClientCapabilities,

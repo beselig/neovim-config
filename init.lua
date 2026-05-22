@@ -5,10 +5,20 @@ vim.g.maplocalleader = '\\'
 
 require 'config.lazy'
 
--- keymaps to quickly resource or run current file or selection
-vim.keymap.set('n', '<leader><leader>x', '<cmd>source %<CR>')
-vim.keymap.set('n', '<leader>x', ':.lua<CR>')
-vim.keymap.set('v', '<leader>x', ':lua<CR>')
+-- -- MOUSE SETTINGS --
+-- -- disable mouse but preserve focus
+-- vim.opt.mouse = 'a'
+-- vim.keymap.set('n', '<LeftMouse>', '<cmd>call win_gotoid(v:mouse_winid)<CR>', { noremap = true })
+-- vim.keymap.set('n', '<LeftDrag>', '<Nop>', { noremap = true })
+-- vim.keymap.set('n', '<LeftRelease>', '<Nop>', { noremap = true })
+-- vim.keymap.set('n', '<2-LeftMouse>', '<Nop>', { noremap = true }) -- disable double-click
+-- vim.keymap.set('n', '<2-LeftDrag>', '<Nop>', { noremap = true })
+-- vim.keymap.set('n', '<2-LeftRelease>', '<Nop>', { noremap = true })
+--
+-- -- keymaps to quickly resource or run current file or selection
+-- vim.keymap.set('n', '<leader><leader>x', '<cmd>source %<CR>')
+-- vim.keymap.set('n', '<leader>x', ':.lua<CR>')
+-- vim.keymap.set('v', '<leader>x', ':lua<CR>')
 -- keymaps for Oil
 
 local oil = pcall(require, 'oil')
