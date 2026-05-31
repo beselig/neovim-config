@@ -1,6 +1,6 @@
 local M = {}
 
----@param bufnr integer Buffer handle, or 0 for current.
+---@param bufnr? integer Buffer handle, or 0 for current.
 local function organize_imports(bufnr)
   local buf = bufnr or 0 -- 0 = current buffer
   local clients = vim.lsp.get_clients { bufnr = buf }
