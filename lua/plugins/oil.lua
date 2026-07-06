@@ -1,5 +1,6 @@
 return {
   'stevearc/oil.nvim',
+  enabled = true,
   opts = {
     view_options = { show_hidden = true },
     -- Configuration for the file preview window

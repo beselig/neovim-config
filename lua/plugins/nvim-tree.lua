@@ -11,7 +11,11 @@ return {
       vim.opt.termguicolors = true
 
       -- empty setup using defaults
-      require('nvim-tree').setup()
+      require('nvim-tree').setup {
+        view = {
+          width = 40,
+        },
+      }
 
       -- OR setup with some options
       -- require("nvim-tree").setup({

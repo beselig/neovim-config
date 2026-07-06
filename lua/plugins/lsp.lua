@@ -7,16 +7,16 @@ return {
         'williamboman/mason-lspconfig.nvim',
         'WhoIsSethDaniel/mason-tool-installer.nvim',
       },
-      {
-        'luckasRanarison/tailwind-tools.nvim',
-        name = 'tailwind-tools',
-        build = ':UpdateRemotePlugins',
-        dependencies = {
-          'nvim-treesitter/nvim-treesitter',
-          'nvim-telescope/telescope.nvim', -- optional
-          'neovim/nvim-lspconfig', -- optional
-        },
-      },
+      -- {
+      --   'luckasRanarison/tailwind-tools.nvim',
+      --   name = 'tailwind-tools',
+      --   build = ':UpdateRemotePlugins',
+      --   dependencies = {
+      --     'nvim-treesitter/nvim-treesitter',
+      --     'nvim-telescope/telescope.nvim', -- optional
+      --     'neovim/nvim-lspconfig', -- optional
+      --   },
+      -- },
       {
         'folke/lazydev.nvim',
         ft = 'lua', -- only load on lua files
@@ -40,6 +40,7 @@ return {
         -- clangd = {},
         gopls = {},
         pyright = {},
+        ruff = {},
         html = {},
 
         postgres_lsp = {},
@@ -161,21 +162,21 @@ return {
         end,
       })
 
-      require('tailwind-tools').setup {
-        server = {
-          capabilities = vim.lsp.ClientCapabilities,
-          override = true, -- setup the server from the plugin if true
-          settings = { -- shortcut for `settings.tailwindCSS`
-            -- experimental = {
-            --   classRegex = { "tw\\('([^']*)'\\)" }
-            -- },
-            -- includeLanguages = {
-            --   elixir = "phoenix-heex",
-            --   heex = "phoenix-heex",
-            -- },
-          },
-        },
-      }
+      -- require('tailwind-tools').setup {
+      --   server = {
+      --     capabilities = vim.lsp.ClientCapabilities,
+      --     override = true, -- setup the server from the plugin if true
+      --     settings = { -- shortcut for `settings.tailwindCSS`
+      --       -- experimental = {
+      --       --   classRegex = { "tw\\('([^']*)'\\)" }
+      --       -- },
+      --       -- includeLanguages = {
+      --       --   elixir = "phoenix-heex",
+      --       --   heex = "phoenix-heex",
+      --       -- },
+      --     },
+      --   },
+      -- }
     end,
   },
 }

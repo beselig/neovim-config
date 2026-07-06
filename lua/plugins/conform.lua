@@ -10,24 +10,25 @@ return {
       stop_after_first = true,
       formatters_by_ft = {
         lua = { 'stylua' },
+        -- conform can also run multiple formatters sequentially
         python = { 'isort', 'black' },
         sql = { 'sqlfluff' },
 
-        -- conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
-        --
-        -- you can use a sub-list to tell conform to run *until* a formatter
-        -- is found.
-        javascript = { 'prettierd', 'prettier' },
-        typescript = { 'prettierd', 'prettier' },
-        javascriptreact = { 'prettierd', 'prettier' },
-        typescriptreact = { 'prettierd', 'prettier' },
-        vue = { 'prettierd', 'prettier' },
-        html = { 'prettierd', 'prettier' },
-        css = { 'prettierd', 'prettier' },
-        scss = { 'prettierd', 'prettier' },
-        json = { 'prettierd', 'prettier' },
-        prisma = { 'prettierd', 'prettier' },
+        javascript = { 'prettierd', 'prettier', stop_after_first = true },
+        javascriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+        typescript = { 'prettierd', 'prettier', stop_after_first = true },
+        typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+        css = { 'prettierd', 'prettier', stop_after_first = true },
+        graphql = { 'prettierd', 'prettier', stop_after_first = true },
+        html = { 'prettierd', 'prettier', stop_after_first = true },
+        json = { 'prettierd', 'prettier', stop_after_first = true },
+        less = { 'prettierd', 'prettier', stop_after_first = true },
+        markdown = { 'prettierd', 'prettier', stop_after_first = true },
+        scss = { 'prettierd', 'prettier', stop_after_first = true },
+        vue = { 'prettierd', 'prettier', stop_after_first = true },
+        yaml = { 'prettierd', 'prettier', stop_after_first = true },
+        prisma = { 'prettierd', 'prettier', stop_after_first = true },
+        rust = { 'rustfmt', lsp_format = 'fallback' },
       },
     },
   },
