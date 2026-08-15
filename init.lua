@@ -19,16 +19,6 @@ require 'config.lazy'
 -- vim.keymap.set('n', '<leader><leader>x', '<cmd>source %<CR>')
 -- vim.keymap.set('n', '<leader>x', ':.lua<CR>')
 -- vim.keymap.set('v', '<leader>x', ':lua<CR>')
--- keymaps for Oil
-
-local oil = pcall(require, 'oil')
-if oil then
-  vim.keymap.set('n', '_', '<CMD>Oil --float<CR>', { desc = 'Open parent directory in floating window' })
-  vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
-else
-  vim.notify('init.lua: Cannot set keymaps for Oil when Oil is not loaded', vim.log.levels.WARN)
-end
-
 -- [[ OPTIONS ]] --
 
 vim.opt.laststatus = 3
@@ -122,7 +112,7 @@ end)
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
   callback = function()
     vim.highlight.on_yank()
   end,

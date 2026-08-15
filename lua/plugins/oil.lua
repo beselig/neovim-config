@@ -1,7 +1,14 @@
 return {
   'stevearc/oil.nvim',
-  enabled = true,
+  -- oil is keymap-only: nvim-tree owns directory buffers (`nvim .`, `:e src/`),
+  -- so oil must not hijack them. That's also what makes lazy-loading safe here
+  -- (upstream only warns against it because of the directory-buffer takeover).
+  keys = {
+    { '_', '<CMD>Oil<CR>', desc = 'Open parent directory' },
+    { '-', '<CMD>Oil --float<CR>', desc = 'Open parent directory in floating window' },
+  },
   opts = {
+    default_file_explorer = false,
     view_options = { show_hidden = true },
     -- Configuration for the file preview window
     preview_win = {
